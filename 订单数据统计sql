@@ -1,0 +1,7 @@
+SELECT order_id 订单id,a.order_money 订单金额,a.create_time 下单时间,a.service_station_name 油站,
+(select name from sys_dict where id=c.parent_id) 油品,c.`name` 油号,
+IFNULL(b.phone,13306409131) 用户手机号
+from jy.`order` a 
+left join tb_user b on a.user_id=b.user_id 
+LEFT JOIN sys_dict c on a.goods_id=c.id 
+where a.`status`=2 and order_money>100
